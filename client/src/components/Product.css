@@ -21,3 +21,9 @@
 margin:10px 70px 0px 70px;
 border-radius: 5px;
 }
+#cartpage{
+    background-color: antiquewhite;
+    display: flex;
+    flex-direction:column;
+    align-items: center;
+}

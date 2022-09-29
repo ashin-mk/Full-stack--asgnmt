@@ -34,7 +34,8 @@ router.post("/Login",async(req,res)=>{
         ispassword=bcrypt.compare(req.body.Password,userexist[0].Password)
         if(ispassword){
             // console.log(user)
-            const token=JWT.sign(process.env.SECRET_KEY,userexist[0].Username)
+            const token=JWT.sign(userexist[0].Username,process.env.SECRET_KEY)
+            console.log(userexist)
             res.status(200).send(token)
         }else{
             res.status(400).send("Password is wrong")

@@ -6,7 +6,7 @@ import Header from './Header'
 import { useNavigate } from 'react-router-dom'
 const Productpage = () => {
     const [data,setdata]=useState()
-    const token=localStorage.getItem("Tokenft")
+    const token1=localStorage.getItem("Tokenft")
     const navigate=useNavigate()
     useEffect(()=>{
         axios.get(Url("product")).then((fetcheddata)=>{
@@ -16,17 +16,15 @@ const Productpage = () => {
 
     },[])
 
-    const handleBuy=()=>{
-
-    }
     const handlecart=(e)=>{
 axios({
     method:'POST',
     url:Url("addcart"),
     headers:{
-        token:token
+        token:token1
     },
-    data:e.target.value
+    data:{
+        Id:data[e.target.value]}
 }).then(()=>{
     navigate("/cart")
 })

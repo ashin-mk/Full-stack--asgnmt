@@ -17,35 +17,39 @@ router.get("/product",async(req,res)=>{
 })
 
 router.post("/addcart",async(req,res)=>{
-    console.log(req.headers)
+    console.log(req.headers.token )
 try{
-    const user=JWT.verify(req.headers.token , process.env.SECRET_KEY)
-    console.log("working")
-    if(user.length){
-        console.log("working")
+    const username=JWT.verify(req.headers.token,process.env.SECRET_KEY)
+    if(username.length){
+        console.log('data',req.body.Id)
         const cartdet=await Cart.find({
-            Username:user,
-            Id:req.body.Id
+            Username:username,
+            Id:req.body.Id.id
         })
         if (cartdet.length){
             res.status(400).send("ALready in cart")
         }else{
-           await Cart.create({
-                Username:user,
-                Id:req.body.Id
-            })
+           await Cart.create({Username:username,Product:req.body.Id,Id:req.body.Id.id})
 res.status(200).send("succes")
         }
     }
 
 }
 catch{
-    console.log("working")
 res.status(400).send("unauthorized user")
 }
 })
 
-router.get("/cartdata",)
+router.get("/cartdata",async(req,res)=>{
+    try {
+        const username=JWT.verify(req.headers.token,process.env.SECRET_KEY)
+        const data=await Cart.find({Username:username})
+        res.status(200).send(data)
+    } catch (error) {
+        
+    }
+   
+})
 
 
 module.exports=router

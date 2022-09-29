@@ -1,0 +1,23 @@
+#producpage{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: aquamarine;
+    height: auto;
+}
+#productcard{
+    background-color: cadetblue;
+    border-radius: 5px;
+    height: 630px;
+    width: 500px;
+    margin: 20px;
+} 
+#productcard p{
+    margin-left: 70px;
+}
+#imgproduct{
+    height: 300px;
+    width: 350px;
+margin:10px 70px 0px 70px;
+border-radius: 5px;
+}
